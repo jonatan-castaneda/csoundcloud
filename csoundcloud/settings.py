@@ -39,12 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
-    'modules.authors',
     'modules.music',
     "modules.Users",
     "modules.Artistas",
-
-
 ]
 
 MIDDLEWARE = [
