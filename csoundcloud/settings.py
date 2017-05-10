@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django_filters',
     'modules.authors',
     'modules.music',
+    "modules.Users",
+    "modules.Artistas",
+
+
 ]
 
 MIDDLEWARE = [
@@ -107,8 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#AUTH_USER_MODEL = "users.User"
-
+AUTH_USER_MODEL = "Users.User"
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
