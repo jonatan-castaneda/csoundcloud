@@ -28,7 +28,7 @@ class Album(models.Model):
     anio = models.IntegerField()
     rating = models.DecimalField(max_digits = 3, decimal_places=2, default=0.00, blank=True,null=True)
     autor = models.ForeignKey(Artista,
-        on_delete = models.CASCADE, null=True, blank=True)
+        on_delete = models.CASCADE, null=True, blank=True, related_name="albums")
     genero = models.CharField(choices = GENEROS, max_length = 20)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Cancion(models.Model):
     nombre = models.CharField(max_length = 50)
     anio = models.IntegerField()
     rating = models.DecimalField(max_digits = 3, decimal_places=2, default=0.00, blank=True,null=True)
-    album = models.ForeignKey(Album, on_delete = models.CASCADE, related_name = "albums")
+    album = models.ForeignKey(Album, on_delete = models.CASCADE, related_name = "canciones")
     genero = models.CharField(choices = GENEROS, max_length = 20)
 
     def __str__(self):

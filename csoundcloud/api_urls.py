@@ -2,5 +2,6 @@ from django.conf.urls import url,include
 from django.contrib import admin
 
 urlpatterns = [
-url(r'^artistas/', include("modules.Artistas.urls")),
+    url(r'^artistas/', include("modules.Artistas.urls")),
+    url(r'^music/', include("modules.music.urls")),
 ]
