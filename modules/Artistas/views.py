@@ -10,7 +10,7 @@ class ListArtista(generics.ListCreateAPIView):
     serializer_class = ArtistaSerializer
     filter_backends = (filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend)
     filter_fields = ("id",)
-    search_fields = ("nombre","nacionalidad",)
+    search_fields = ("nombre","nacionalidad","genero")
 
 
 
