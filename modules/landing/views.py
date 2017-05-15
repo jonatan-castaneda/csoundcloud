@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import requests
 import json
-
+from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return render(request, "landing/index.html")
@@ -55,3 +55,25 @@ def canciones(request):
     return render(request, "landing/canciones.html", {
         'canciones' : json_str,
         })
+
+def guarda(request):
+    #para guardar archivos con el api
+    url = 'http://localhost:8000/api/v1/music/files/'
+    files = {'file': open('/home/adrian/logo_unam.png', 'rb')}
+    r = requests.post(url, files=files)
+    print(r.text)
+    
+    # para hacer update a la tabla canciones con el api
+    url = 'http://127.0.0.1:8000/api/v1/music/canciones/1/'
+    cancion = {
+        "id": 1,
+        "nombre": "Cancion 1",
+        "anio": 2015,
+        "genero": "LA",
+        "album": 1,
+        "rating": "5.00",
+        "url_cancion": "logo_unam.png"
+    }
+    r = requests.put(url,data=cancion)
+
+    return HttpResponse("guardado")
