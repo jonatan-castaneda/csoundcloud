@@ -15,7 +15,7 @@ class ListAlbum(generics.ListCreateAPIView):
     django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('nombre','anio','autor','genero')
     search_fields = ('nombre')
-    
+
 
 class DetailAlbum(generics.RetrieveUpdateDestroyAPIView):
     queryset = Album.objects.all()
