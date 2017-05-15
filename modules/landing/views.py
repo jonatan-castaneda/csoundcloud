@@ -17,4 +17,3 @@ def artistas(request):
     return render(request, "landing/artistas.html", {
         'artistas' : json_str,
         })
-
