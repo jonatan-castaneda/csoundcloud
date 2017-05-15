@@ -8,6 +8,10 @@ import django_filters.rest_framework
 class ListArtista(generics.ListCreateAPIView):
     queryset=Artista.objects.all()
     serializer_class = ArtistaSerializer
+    filter_backends =  (filters.SearchFilter,
+    django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('nombre','genero')
+    search_fields = ('nombre')
 
 
 class DetailArtista(generics.RetrieveUpdateDestroyAPIView):

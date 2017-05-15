@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'modules.music',
     "modules.Users",
     "modules.Artistas",
-    "modules.landing"
+    "modules.landing",
+    'rest_framework_swagger',    
 ]
 
 MIDDLEWARE = [
