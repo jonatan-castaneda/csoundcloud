@@ -12,7 +12,7 @@ class ListArtista(generics.ListCreateAPIView):
     filter_backends =  (filters.SearchFilter,
     django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('nombre','genero')
-    search_fields = ('nombre')
+    search_fields = ('nombre','genero')
 
 
 class DetailArtista(generics.RetrieveUpdateDestroyAPIView):
