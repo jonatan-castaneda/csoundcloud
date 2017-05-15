@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 import json
+
 # Create your views here.
 def index(request):
     return render(request, "landing/index.html")
@@ -8,14 +9,15 @@ def index(request):
 def dashboard(request):
     return render(request, "landing/dashboard.html")
 
+
 def artistas(request, id=False):
     r = requests.get("http://localhost:8000/api/v1/artistas?format=json")
     string = r.text
     json_str = json.loads(string, encoding=None)
-    
     return render(request, "landing/artistas.html", {
         'artistas' : json_str,
         })
+
 
 def albums(request, artista=False):
     if artista:
@@ -40,3 +42,4 @@ def canciones(request, album=False):
     return render(request, "landing/canciones.html", {
         'canciones': json_str
     })
+

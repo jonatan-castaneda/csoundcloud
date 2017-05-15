@@ -10,11 +10,12 @@ class ListAlbum(generics.ListCreateAPIView):
 
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-    filter_backends = (filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend)
-    filter_fields = ("autor",)
-    search_fields = ("nombre","genero",)
+    #filter_backends = (filter)    
+    filter_backends =  (filters.SearchFilter,
+    django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('nombre','anio','autor','genero')
+    search_fields = ('nombre')
 
-    #filter_backends = (filter)
 
 class DetailAlbum(generics.RetrieveUpdateDestroyAPIView):
     queryset = Album.objects.all()
@@ -23,9 +24,11 @@ class DetailAlbum(generics.RetrieveUpdateDestroyAPIView):
 class ListCanciones(generics.ListCreateAPIView):
     queryset = Cancion.objects.all()
     serializer_class = CancionSerializer
-    filter_backends = (filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend)
-    filter_fields = ("album",)
-    search_fields = ("nombre","genero",)
+    #filters
+    filter_backends =  (filters.SearchFilter,
+    django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('nombre','anio','album','genero')
+    search_fields = ('nombre')
 
 class DetailCanciones(generics.RetrieveUpdateDestroyAPIView):
     queryset = Cancion.objects.all()
