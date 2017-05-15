@@ -4,10 +4,13 @@
             <form action="{% url 'landing:artistas' %}" method="POST">
               {% csrf_token %}
               
-                <button class="material-icons">search</button>
-              
-              
-                <input class="mdl-textfield__input" name="q" type="text" id="q">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                  <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                  <input class="mdl-textfield__input" type="text" name="q" id="search">
+                  <label class="mdl-textfield__label" for="search">Enter your search...</label>
+                </div>
               
             </form>
 </div>
@@ -33,4 +36,8 @@
           </div>
           
         </div>
+{% endblock %}
+
+{% block add %}
+  <a href="" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"> <i class="material-icons">add</i> Add Artists</a>
 {% endblock %}
