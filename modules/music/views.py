@@ -14,7 +14,7 @@ class ListAlbum(generics.ListCreateAPIView):
     filter_backends =  (filters.SearchFilter,
     django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('nombre','anio','autor','genero')
-    search_fields = ('nombre')
+    search_fields = ('nombre','genero')
 
 
 class DetailAlbum(generics.RetrieveUpdateDestroyAPIView):
@@ -28,7 +28,7 @@ class ListCanciones(generics.ListCreateAPIView):
     filter_backends =  (filters.SearchFilter,
     django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('nombre','anio','album','genero')
-    search_fields = ('nombre')
+    search_fields = ('nombre','genero')
 
 class DetailCanciones(generics.RetrieveUpdateDestroyAPIView):
     queryset = Cancion.objects.all()
