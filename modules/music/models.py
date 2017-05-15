@@ -42,6 +42,7 @@ class Cancion(models.Model):
     rating = models.DecimalField(max_digits = 3, decimal_places=2, default=0.00, blank=True,null=True)
     album = models.ForeignKey(Album, on_delete = models.CASCADE, related_name = "canciones")
     genero = models.CharField(choices = GENEROS, max_length = 20)
+    url_cancion = models.CharField(max_length = 200, blank=True,null=True)
 
     def __str__(self):
         return "Cancion: %s" % (self.nombre,)

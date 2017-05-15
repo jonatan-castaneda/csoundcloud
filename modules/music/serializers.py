@@ -5,7 +5,7 @@ from .models import Cancion,Album
 class CancionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cancion
-        fields = ("id","nombre", "anio", "genero", "album", "rating")
+        fields = ("id","nombre", "anio", "genero", "album", "rating","url_cancion")
 
 class AlbumSerializer(serializers.ModelSerializer):
     canciones = CancionSerializer(read_only = True, many = True)

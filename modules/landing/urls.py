@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import index, dashboard, artistas, albums, canciones, add_artista, add_album
+from .views import index, dashboard, artistas, albums, canciones, add_artista, add_album, guarda
 
 urlpatterns = [
     url(r'^$', index, name="index"),
@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^albums/(?P<artista>[0-9]+)$',albums, name="albums_find"),
     url(r'^artistas/add_artista/$', add_artista, name="add_artista"),
     url(r'^albums/add_album/$', add_album, name="add_album"),
+    url(r'^guarda/$', guarda, name="guarda"),
+
 ]
