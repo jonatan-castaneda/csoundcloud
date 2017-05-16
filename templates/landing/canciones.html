@@ -29,7 +29,10 @@
                 {{cancion.anio}}
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">View</a>
+                <audio controls>
+                  <source src="/media/{{cancion.url_cancion}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio>
               </div>
             </div>
             {% endfor %}

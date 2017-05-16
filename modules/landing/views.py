@@ -124,7 +124,7 @@ def add_album(request):
             data = {
                 'nombre': form.cleaned_data['nombre'],
                 'anio' : form.cleaned_data['anio'],
-                'artista': form.cleaned_data['artista'],
+                'artista': request.POST['artista'],
                 'genero' : form.cleaned_data['genero'],
                 
             }
@@ -199,9 +199,13 @@ def add_cancion(request):
             'album': request.POST['album'],
             'genero' : request.POST['genero'],
             'rating' : request.POST['rating'],
-            'url_cancion': request.POST['url_cancion']
+            'url_cancion': str(request.FILES["url_cancion"])
         }
         r = requests.put(url,data=cancion)
+        #print(request.FILES["url_cancion"])
+        #file = dict(request.FILES["url_cancion"]).pop()
+        files={'file': request.FILES['url_cancion']}
+        r = requests.post('https://cscloud.herokuapp.com/api/v1/music/files/',files=files)
         print(r.text)
     return render(request, "landing/add_cancion.html", {
             'albums':albums,
