@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import requests
 import json
 from .forms import AddArtistaForm, AddAlbumForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 # Create your views here.
 def index(request):
@@ -15,7 +15,7 @@ def dashboard(request):
 def artistas(request, id=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
-        r = requests.get("http://localhost:8000/api/v1/artistas",params=p)
+        r = requests.get(request.site + "/api/v1/artistas",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
@@ -27,7 +27,8 @@ def artistas(request, id=False):
             string = r.text
             json_str = json.loads(string, encoding=None)
         else:
-            r = requests.get("http://localhost:8000/api/v1/artistas")
+            print(request)
+            r = requests.get(get_current_site() + "/api/v1/artistas")
             string = r.text
             json_str = json.loads(string, encoding=None)   
 
