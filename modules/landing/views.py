@@ -12,47 +12,71 @@ def dashboard(request):
     return render(request, "landing/dashboard.html")
 
 
-def artistas(request):
+def artistas(request, id=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
         r = requests.get("http://localhost:8000/api/v1/artistas",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
-        r = requests.get("http://localhost:8000/api/v1/artistas")
-        string = r.text
-        json_str = json.loads(string, encoding=None)        
+        if id:
+            data = {
+                'id':id,
+            }
+            r = requests.get("http://localhost:8000/api/v1/artistas", params=data)
+            string = r.text
+            json_str = json.loads(string, encoding=None)
+        else:
+            r = requests.get("http://localhost:8000/api/v1/artistas")
+            string = r.text
+            json_str = json.loads(string, encoding=None)   
 
     return render(request, "landing/artistas.html", {
         'artistas' : json_str,
         })
 
 
-def albums(request):
+def albums(request, artista=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
         r = requests.get("http://localhost:8000/api/v1/music/albums",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
-        r = requests.get("http://localhost:8000/api/v1/music/albums")
-        string = r.text
-        json_str = json.loads(string, encoding=None)        
+        if artista:
+            data = {
+                'autor':artista
+            }
+            r = requests.get("http://localhost:8000/api/v1/music/albums", params=data)
+            string = r.text
+            json_str = json.loads(string, encoding=None)        
+        else:
+            r = requests.get("http://localhost:8000/api/v1/music/albums")
+            string = r.text
+            json_str = json.loads(string, encoding=None)
 
     return render(request, "landing/albums.html", {
         'albums' : json_str,
         })
 
-def canciones(request):
+def canciones(request, album=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
         r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
-        r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/")
-        string = r.text
-        json_str = json.loads(string, encoding=None)        
+        if album:
+            data = {
+                'album':album,
+            }
+            r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/", params=data)
+            string = r.text
+            json_str = json.loads(string, encoding=None)    
+        else:
+            r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/")
+            string = r.text
+            json_str = json.loads(string, encoding=None)      
 
     return render(request, "landing/canciones.html", {
         'canciones' : json_str,

@@ -11,7 +11,7 @@ class ListArtista(generics.ListCreateAPIView):
 
     filter_backends =  (filters.SearchFilter,
     django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('nombre','genero')
+    filter_fields = ('id', 'nombre','genero')
     search_fields = ('nombre','genero')
 
 
