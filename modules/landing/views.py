@@ -124,7 +124,9 @@ def add_album(request):
         return render(request, "landing/add_album.html", {
             'form':form
         })
-
+def add_cancion(request):
+    pass
+    
 def guarda(request):
     #para guardar archivos con el api
     url = 'http://localhost:8000/api/v1/music/files/'
