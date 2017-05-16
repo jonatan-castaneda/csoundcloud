@@ -6,3 +6,4 @@ class ArtistaAdmin(admin.ModelAdmin):
 admin.site.register(Artista, ArtistaAdmin)
 
 # Register your models here.
+# Register your models here.
