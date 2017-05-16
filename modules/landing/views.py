@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import requests
 import json
 from .forms import AddArtistaForm, AddAlbumForm
@@ -111,8 +111,60 @@ def add_album(request):
             'form':form
         })
 def add_cancion(request):
-    pass
-    
+    generos ={
+      "LA":"Latina",
+      "PO":"Pop",
+      "RO":"Rock",
+      "IA":"Indie/Alternativa",
+      "DA":"Dance",
+      "HH":"Hip Hop",
+      "RB":"Rhythm and Blues",
+      "CO":"Country",
+      "FA":"Folk & Americana",
+      "ME": "Metal",
+      "SO": "Soul",
+      "JA": "Jazz",
+      "BL": "Blues",
+      "PU": "Punk",
+      "FU": "Funk",
+      "CL": "Clásica",  
+    }
+    r = requests.get("http://localhost:8000/api/v1/music/albums")
+    string = r.text
+    albums = json.loads(string, encoding=None)
+    if request.method == 'POST':
+        data = {
+                'nombre': request.POST['nombre'],
+                'anio' : request.POST['anio'],
+                'album': request.POST['album'],
+                'genero' : request.POST['genero'],
+                'rating' : request.POST['rating'],
+                
+            }
+        r = requests.post("http://localhost:8000/api/v1/music/canciones/",data=data)
+         
+        #print(r.text)
+        #print(request.POST['url_cancion'])
+        string_cancion = r.text
+        cancion_dict = json.loads(string_cancion,encoding=None)
+        #print(cancion['id'])
+        url = 'http://127.0.0.1:8000/api/v1/music/canciones/%s/' % (cancion_dict['id'])
+        cancion = {
+            'id': cancion_dict['id'],
+            'nombre': request.POST['nombre'],
+            'anio' : request.POST['anio'],
+            'album': request.POST['album'],
+            'genero' : request.POST['genero'],
+            'rating' : request.POST['rating'],
+            'url_cancion': request.POST['url_cancion']
+        }
+        r = requests.put(url,data=cancion)
+        print(r.text)
+    return render(request, "landing/add_cancion.html", {
+            'albums':albums,
+            'generos':generos,
+        })
+
 def guarda(request):
     #para guardar archivos con el api
     url = 'http://localhost:8000/api/v1/music/files/'
