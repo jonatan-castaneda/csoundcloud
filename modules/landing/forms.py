@@ -88,7 +88,7 @@ class AddAlbumForm(forms.Form):
         widget = forms.Select(
             attrs={
                 'class':'mdl-textfield__input',
-                'id':'input_artistas',
+                'ids':'input_artistas',
             }
         )
     )
