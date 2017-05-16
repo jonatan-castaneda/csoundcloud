@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import requests
 import json
 from .forms import AddArtistaForm, AddAlbumForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 # Create your views here.
 def index(request):
@@ -15,7 +15,7 @@ def dashboard(request):
 def artistas(request, id=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
-        r = requests.get("http://localhost:8000/api/v1/artistas",params=p)
+        r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
@@ -23,11 +23,12 @@ def artistas(request, id=False):
             data = {
                 'id':id,
             }
-            r = requests.get("http://localhost:8000/api/v1/artistas", params=data)
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas", params=data)
             string = r.text
             json_str = json.loads(string, encoding=None)
         else:
-            r = requests.get("http://localhost:8000/api/v1/artistas")
+            print(request)
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas")
             string = r.text
             json_str = json.loads(string, encoding=None)   
 
@@ -39,7 +40,7 @@ def artistas(request, id=False):
 def albums(request, artista=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
-        r = requests.get("http://localhost:8000/api/v1/music/albums",params=p)
+        r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
@@ -47,11 +48,11 @@ def albums(request, artista=False):
             data = {
                 'autor':artista
             }
-            r = requests.get("http://localhost:8000/api/v1/music/albums", params=data)
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums", params=data)
             string = r.text
             json_str = json.loads(string, encoding=None)        
         else:
-            r = requests.get("http://localhost:8000/api/v1/music/albums")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums")
             string = r.text
             json_str = json.loads(string, encoding=None)
 
@@ -62,7 +63,7 @@ def albums(request, artista=False):
 def canciones(request, album=False):
     if request.method == 'POST':
         p = {'search':request.POST['q']}
-        r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/",params=p)
+        r = requests.get("https://cscloud.herokuapp.com/api/v1/music/canciones/",params=p)
         string = r.text
         json_str = json.loads(string, encoding=None)
     else:
@@ -70,11 +71,11 @@ def canciones(request, album=False):
             data = {
                 'album':album,
             }
-            r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/", params=data)
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/canciones/", params=data)
             string = r.text
             json_str = json.loads(string, encoding=None)    
         else:
-            r = requests.get("http://127.0.0.1:8000/api/v1/music/canciones/")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/canciones/")
             string = r.text
             json_str = json.loads(string, encoding=None)      
 
@@ -94,16 +95,16 @@ def add_artista(request):
                 'genero' : form.cleaned_data['genero'],
                 
             }
-            r = requests.post("http://localhost:8000/api/v1/artistas/",data=data)
+            r = requests.post("https://cscloud.herokuapp.com/api/v1/artistas/",data=data)
             print(r.status_code)
-            r = requests.get("http://localhost:8000/api/v1/artistas")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas")
             string = r.text
             json_str = json.loads(string, encoding=None) 
             return render(request, "landing/artistas.html",{
                 'artistas':json_str
             })
         else:
-            r = requests.get("http://localhost:8000/api/v1/artistas")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas")
             string = r.text
             json_str = json.loads(string, encoding=None) 
             return render(request, "landing/artistas.html",{
@@ -127,16 +128,16 @@ def add_album(request):
                 'genero' : form.cleaned_data['genero'],
                 
             }
-            r = requests.post("http://localhost:8000/api/v1/music/albums/",data=data)
+            r = requests.post("https://cscloud.herokuapp.com/api/v1/music/albums/",data=data)
             print(r.status_code)
-            r = requests.get("http://localhost:8000/api/v1/music/albums")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums")
             string = r.text
             json_str = json.loads(string, encoding=None) 
             return render(request, "landing/albums.html",{
                 'albums':json_str
             })
         else:
-            r = requests.get("http://localhost:8000/api/v1/music/albums")
+            r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums")
             string = r.text
             json_str = json.loads(string, encoding=None) 
             return render(request, "landing/albums.html",{
@@ -167,7 +168,7 @@ def add_cancion(request):
       "FU": "Funk",
       "CL": "Clásica",  
     }
-    r = requests.get("http://localhost:8000/api/v1/music/albums")
+    r = requests.get("https://cscloud.herokuapp.com/api/v1/music/albums")
     string = r.text
     albums = json.loads(string, encoding=None)
     if request.method == 'POST':
@@ -179,14 +180,14 @@ def add_cancion(request):
                 'rating' : request.POST['rating'],
                 
             }
-        r = requests.post("http://localhost:8000/api/v1/music/canciones/",data=data)
+        r = requests.post("https://cscloud.herokuapp.com/api/v1/music/canciones/",data=data)
          
         #print(r.text)
         #print(request.POST['url_cancion'])
         string_cancion = r.text
         cancion_dict = json.loads(string_cancion,encoding=None)
         #print(cancion['id'])
-        url = 'http://127.0.0.1:8000/api/v1/music/canciones/%s/' % (cancion_dict['id'])
+        url = 'https://cscloud.herokuapp.com/api/v1/music/canciones/%s/' % (cancion_dict['id'])
         cancion = {
             'id': cancion_dict['id'],
             'nombre': request.POST['nombre'],
@@ -205,13 +206,13 @@ def add_cancion(request):
 
 def guarda(request):
     #para guardar archivos con el api
-    url = 'http://localhost:8000/api/v1/music/files/'
+    url = 'https://cscloud.herokuapp.com/api/v1/music/files/'
     files = {'file': open('/home/adrian/logo_unam.png', 'rb')}
     r = requests.post(url, files=files)
     print(r.text)
     
     # para hacer update a la tabla canciones con el api
-    url = 'http://127.0.0.1:8000/api/v1/music/canciones/1/'
+    url = 'https://cscloud.herokuapp.com/api/v1/music/canciones/1/'
     cancion = {
         "id": 1,
         "nombre": "Cancion 1",
