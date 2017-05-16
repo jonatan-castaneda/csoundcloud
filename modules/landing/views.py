@@ -220,7 +220,7 @@ def guarda(request):
         "genero": "LA",
         "album": 1,
         "rating": "5.00",
-        "url_cancion": "logo_unam.png"
+        "url_cancion": "logo_unam.png",
     }
     r = requests.put(url,data=cancion)
 
