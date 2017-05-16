@@ -67,7 +67,6 @@ class AddArtistaForm(forms.Form):
     )
 
 class AddAlbumForm(forms.Form):
-    #ARTISTAS = Artista.objects.all()
     nombre = forms.CharField(
         widget = forms.TextInput(
             attrs={
@@ -81,14 +80,6 @@ class AddAlbumForm(forms.Form):
             attrs={
                 'class':'mdl-textfield__input',
                 'id':'input_anio',
-            }
-        )
-    )
-    artista = forms.ChoiceField(choices=GENEROS,
-        widget = forms.Select(
-            attrs={
-                'class':'mdl-textfield__input',
-                'id':'input_artistas',
             }
         )
     )

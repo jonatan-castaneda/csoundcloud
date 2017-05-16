@@ -146,8 +146,12 @@ def add_album(request):
         
 
     else:
+        r = requests.get("https://cscloud.herokuapp.com/api/v1/artistas?format=json")
+        string = r.text
+        json_str = json.loads(string, encoding=None) 
         return render(request, "landing/add_album.html", {
-            'form':form
+            'form':form,
+            'artistas':json_str,
         })
 def add_cancion(request):
     generos ={

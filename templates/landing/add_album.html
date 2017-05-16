@@ -16,7 +16,11 @@
             <br>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
               <label for="input_artista" class="mdl-textfield__label">Artista</label>
-              {{form.artista}}
+              <select class="mdl-textfield__input" name="artista" id="input_artista">
+                {% for artista in artistas %}
+                  <option value="{{artista.id}}">{{artista.nombre}}</option>
+                {% endfor %}
+              </select>
             </div>
             <br>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
