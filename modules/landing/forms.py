@@ -67,7 +67,7 @@ class AddArtistaForm(forms.Form):
     )
 
 class AddAlbumForm(forms.Form):
-    ARTISTAS = dict(Artista.objects.all())
+    ARTISTAS = Artista.objects.all()
     print(ARTISTAS)
     nombre = forms.CharField(
         widget = forms.TextInput(
