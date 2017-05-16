@@ -78,6 +78,13 @@ def add_artista(request):
             return render(request, "landing/artistas.html",{
                 'artistas':json_str
             })
+        else:
+            r = requests.get("http://localhost:8000/api/v1/artistas")
+            string = r.text
+            json_str = json.loads(string, encoding=None) 
+            return render(request, "landing/artistas.html",{
+                'artistas':json_str
+            })
         
 
     else:
@@ -98,6 +105,13 @@ def add_album(request):
             }
             r = requests.post("http://localhost:8000/api/v1/music/albums/",data=data)
             print(r.status_code)
+            r = requests.get("http://localhost:8000/api/v1/music/albums")
+            string = r.text
+            json_str = json.loads(string, encoding=None) 
+            return render(request, "landing/albums.html",{
+                'albums':json_str
+            })
+        else:
             r = requests.get("http://localhost:8000/api/v1/music/albums")
             string = r.text
             json_str = json.loads(string, encoding=None) 

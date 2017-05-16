@@ -2,7 +2,7 @@
 
 {% block content %}
         <div class="mdl-grid demo-content">
-          <form action="{% url 'landing:add_artista' %}" method="post">
+          <form action="{% url 'landing:add_album' %}" method="post">
             {% csrf_token %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
               <label for="input_nombre" class="mdl-textfield__label">Nombre</label>

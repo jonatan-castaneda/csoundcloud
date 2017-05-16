@@ -39,5 +39,5 @@
 {% endblock %}
 
 {% block add %}
-  <a href="" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"> <i class="material-icons">add</i> Add Albums</a>
+  <a href="{% url 'landing:add_album' %}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast"> <i class="material-icons">add</i> Add Albums</a>
 {% endblock %}
